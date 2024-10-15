@@ -1,23 +1,23 @@
-# MonoGame-SpriteFont-HardEncoder-To-Class
-This rep is a single class with nested classes that facilitate the abilty to turn a spritefont into a loadable cs file.
+# GopherWood
 
-So this class you give it a sprite font and call the write method.
+This is a refactor of [willmotil's](https://github.com/willmotil/MonoGame-SpriteFont-HardEncoder-To-Class) excellent helper for hard-coding SpriteFonts into C#. This is helpful should you need a built-in default font in a library that isn't concerned with defining a content repository.
 
-What you get is a text file.
-You copy paste that text file into a class in your monogame project or make one with the same name.
-The text file is basically a ready made copy paste class file that will generate a spritefont instance at runtime from itself. including the textures pixels which is lightly compressed into array text.
+### Notes
+An original warning of willmotil's the following:
+>"Be aware, I believe you should dispose the hard-coded result's texture in the Unload method of Game1, as this wouldn't have been loaded through the content manager.".
 
-There is a method that you call that essentially returns a Spritefont from that class.
-So if you add that generated class to any project no texture is needed.
-No call to content load is needed you don't have to load anything.
+I would add that you might have better luck using monospaced fonts. Also, Texture.GetData<Color>() doesn't seem to be able to adjust its validation for SpriteFonts that have been compressed. I'd encourage you to set TextureFormat to "Color" in the configuration of the pipeline tool.
 
-Is it useful ?.. well i made it as a default fallback spritefont but its neat either way.
+<p align="left">
+  <img src="pipeline-config.png" alt="Pipeline Config">
+</p>
 
-If you just want to see the results you can copy paste the below class into a monogame project say below game1 or into a new class.
-This is the resulting output of one i already premade.
 
-https://github.com/willmotil/MonoGame-SpriteFont-HardEncoder-To-Class/blob/master/Example/ExampleOutput.cs
+### Usage
+Import the font like you would normally and then call the utility.
+`SpriteFont font = Content.Load<SpriteFont>("fonts/MyFont");`
+`SpriteFontHardCoder.Run(font, "MyFont", "C:/Users/myname/AppData/Local/MyApp");`
 
-Basically in loadcontent or were ever call.
-
-SpriteFont font = new HardCodedSpriteFont().GetFont(GraphicsDevice);
+Then copy-and-paste the C# file that process wrote to the project you'll be consuming it. Correct the namespace it generated with to whatever is appropriate.
+Not you can do the following:
+`SpriteFont font = new MyFont().GetFont(GraphicsDevice);`
