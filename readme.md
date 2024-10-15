@@ -1,4 +1,4 @@
-# GopherWood
+# MonoGame.SpriteFontHardCoder
 
 This is a refactor of [willmotil's](https://github.com/willmotil/MonoGame-SpriteFont-HardEncoder-To-Class) excellent helper for hard-coding SpriteFonts into C#. This is helpful should you need a built-in default font in a library that isn't concerned with defining a content repository.
 
