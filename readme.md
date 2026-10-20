@@ -4,7 +4,7 @@ This is a refactor of [willmotil's](https://github.com/willmotil/MonoGame-Sprite
 
 ### Notes
 An original warning of willmotil's is the following:
->"Be aware, I believe you should dispose the hard-coded result's texture in the Unload method of Game1, as this wouldn't have been loaded through the content manager.".
+>"Be aware, I believe you should dispose the hard-coded result's texture in the Unload method of Game1, as this wouldn't have been loaded through the content manager."
 
 I would add that you might have better luck in general using monospaced fonts. Also, Texture.GetData<Color>() doesn't seem to be able to adjust its validation for SpriteFonts that have been compressed. I'd encourage you to set TextureFormat to "Color" in the configuration of the pipeline tool.
 
