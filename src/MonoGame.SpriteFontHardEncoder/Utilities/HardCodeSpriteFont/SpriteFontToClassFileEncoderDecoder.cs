@@ -85,7 +85,7 @@ internal class SpriteFontToClassFileEncoderDecoder
             .AppendLine(string.Empty)
             .AppendLine("\tprivate static Color[] DecodeDataRLE(List<byte> rleByteData)")
             .AppendLine("\t{")
-            .AppendLine("\t\tList <Color> colors = [];")
+            .AppendLine("\t\tList<Color> colors = [];")
             .AppendLine(string.Empty)
             .AppendLine("\t\tfor (int i = 0; i < rleByteData.Count; i++)")
             .AppendLine("\t\t{")
