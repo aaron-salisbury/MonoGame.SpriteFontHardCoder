@@ -1,4 +1,4 @@
-﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
@@ -123,6 +123,11 @@ internal class SpriteFontToClassFileEncoderDecoder
             .AppendLine("\t#endregion")
             .AppendLine("}");
 
+        if (!Directory.Exists(saveDirectoryPath))
+        {
+            Directory.CreateDirectory(saveDirectoryPath);
+        }
+
         string fullPath = Path.Combine(saveDirectoryPath, $"{fontName}.cs");
         File.WriteAllText(fullPath, theCSharpText.ToString());
     }
@@ -140,9 +145,9 @@ internal class SpriteFontToClassFileEncoderDecoder
 
         while (colorArrayIndex < colorArrayLength)
         {
-            var colorMasked = (colorArray[colorArrayIndex].A / 2);
-            var encodedValue = colorMasked;
-            var runLength = 0;
+            int colorMasked = (colorArray[colorArrayIndex].A / 2);
+            int encodedValue = colorMasked;
+            int runLength = 0;
 
             // Find the run length for this pixel.
             for (int i = 1; i < 255; i++)
@@ -150,7 +155,7 @@ internal class SpriteFontToClassFileEncoderDecoder
                 int indexToTest = colorArrayIndex + i;
                 if (indexToTest < colorArrayLength)
                 {
-                    var testColorMasked = (colorArray[indexToTest].A / 2);
+                    int testColorMasked = (colorArray[indexToTest].A / 2);
 
                     if (testColorMasked == colorMasked)
                     {

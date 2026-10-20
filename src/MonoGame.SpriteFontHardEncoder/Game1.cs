@@ -1,4 +1,4 @@
-﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
@@ -23,15 +23,23 @@ public class Game1 : Game
 
     protected override void LoadContent()
     {
-        //TODO: Something like the following:
-        //SpriteFont font = Content.Load<SpriteFont>("fonts/FreeMono");
-        //SpriteFontHardCoder.Run(font, "FreeMono", "C:/Users/aaron/AppData/Local/RunnethOverStudio");
+        //TODO: Update with your font. First make sure to:
+        // - Place your font file in the Content/fonts folder.
+        // - Create a *.spritefont file and place it next to your font file.
+        // - Open the *.spritefont file in a text editor and change the font name line to match the TTF filename.
+        // - Launch Content.mgcb, make sure the *.spritefont file is included, change its TextureFormat property to Color, and build the content.
+
+        //SpriteFont font = Content.Load<SpriteFont>("fonts/RobotoMono-Regular");
+        //string saveDirectory = System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.LocalApplicationData), "MonoGame.SpriteFontHardEncoder");
+        //SpriteFontHardEncoder.Run(font, "RobotoMono", saveDirectory);
     }
 
     protected override void Update(GameTime gameTime)
     {
         if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+        {
             Exit();
+        }
 
         base.Update(gameTime);
     }

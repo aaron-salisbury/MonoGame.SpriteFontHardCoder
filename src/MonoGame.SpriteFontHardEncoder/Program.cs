@@ -1,4 +1,4 @@
-﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework;
 using System;
 using System.Diagnostics;
 
@@ -6,10 +6,8 @@ namespace MonoGame.SpriteFontHardEncoder;
 
 internal class Program
 {
-    public static void Main(string[] args)
+    public static int Main()
     {
-        int exitCode = 0;
-
         try
         {
             using Game game = new Game1();
@@ -19,11 +17,9 @@ internal class Program
         {
             Debug.WriteLine($"An unexpected error occurred: {ex.Message}");
             Debug.WriteLine(ex.StackTrace);
-            exitCode = 1;
+            return 1;
         }
-        finally
-        {
-            Environment.Exit(exitCode);
-        }
+
+        return 0;
     }
 }

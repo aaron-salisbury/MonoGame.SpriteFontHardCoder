@@ -24,3 +24,5 @@ Then copy-and-paste the C# file that process wrote to the project you'll be cons
 Now you can do the following:
 
 `SpriteFont font = new MyFont().GetFont(GraphicsDevice);`
+
+The Roboto Mono (Regular) font, by Christian Robertson, is included as an example. It's license can be viewed [here](https://fonts.google.com/specimen/Roboto+Mono/license).

@@ -1,4 +1,4 @@
-﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using System.IO;
@@ -12,7 +12,7 @@ namespace MonoGame.SpriteFontHardEncoder;
 /// <remarks>
 /// Derived from <see href="https://github.com/willmotil/MonoGame-SpriteFont-HardEncoder-To-Class/tree/master">willmotil's offering</see>.
 /// </remarks>
-public static class SpriteFontHardCoder
+public static class SpriteFontHardEncoder
 {
     /// <summary>
     /// This breaks a <see cref="SpriteFont"/> down and then writes it as a C# file.
@@ -49,7 +49,7 @@ public static class SpriteFontHardCoder
             glyphKernings.Add(new Vector3(kvp.Value.LeftSideBearing, kvp.Value.Width, kvp.Value.RightSideBearing));
         }
 
-        char defaultChar = spriteFont.DefaultCharacter.HasValue ? spriteFont.DefaultCharacter.Value : '*';
+        char defaultChar = spriteFont.DefaultCharacter ?? '*';
 
         return new SpriteFontData()
         {
