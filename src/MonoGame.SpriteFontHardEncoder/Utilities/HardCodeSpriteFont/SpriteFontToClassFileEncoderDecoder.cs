@@ -33,14 +33,6 @@ internal class SpriteFontToClassFileEncoderDecoder
 
         StringBuilder theCSharpText = new();
 
-        theCSharpText.AppendLine(
-            "/*" +
-            "\n    This file is programmatically generated. This class is hard-coded instance data for a instance of a Microsoft.Xna.Framework.Graphics.SpriteFont." +
-            "\n    Use the GetFont method to load it." +
-            "\n    Be aware, I believe you should dispose its texture in game1 unload as this won't have been loaded through the content manager." +
-            "\n*/" +
-            "\n");
-
         theCSharpText
             .AppendLine("using Microsoft.Xna.Framework;")
             .AppendLine("using Microsoft.Xna.Framework.Graphics;")
@@ -49,10 +41,16 @@ internal class SpriteFontToClassFileEncoderDecoder
             .AppendLine("namespace MonoGame.SpriteFontHardEncoder;")
             .AppendLine(string.Empty)
             .AppendLine("/// <summary>")
-            .AppendLine($"/// {fontName} font that has been converted into <see cref=\"SpriteFont\"/> and hard-coded.")
+            .AppendLine($"/// {fontName} font, previously converted to a <see cref=\"SpriteFont\"/> and finally hard-encoded.")
+            .AppendLine("/// <list type=\"bullet\">")
+            .AppendLine("///   <item>")
+            .AppendLine("///     <description>The conversion tool used is available <see href=\"https://github.com/aaron-salisbury/MonoGame.SpriteFontHardCoder\">here</see>.</description>")
+            .AppendLine("///   </item>")
+            .AppendLine("/// </list>")
             .AppendLine("/// </summary>")
             .AppendLine("/// <remarks>")
-            .AppendLine("/// Conversion tool made available by <see href=\"https://github.com/willmotil/MonoGame-SpriteFont-HardEncoder-To-Class/tree/master\">willmotil</see>.")
+            .AppendLine("/// Creates a SpriteFont with a newly allocated Texture2D.")
+            .AppendLine("/// The caller owns the texture and must dispose it when finished.")
             .AppendLine("/// </remarks>")
             .AppendLine($"public class {fontName}")
             .AppendLine("{")
@@ -72,9 +70,17 @@ internal class SpriteFontToClassFileEncoderDecoder
             .AppendLine("\t{")
             .AppendLine("\t\tColor[] colData = DecodeDataRLE(rleByteData);")
             .AppendLine("\t\tTexture2D texture = new(device, width, height);")
-            .AppendLine("\t\ttexture.SetData<Color>(colData);")
             .AppendLine(string.Empty)
-            .AppendLine("\t\treturn texture;")
+            .AppendLine("\t\ttry")
+            .AppendLine("\t\t{")
+            .AppendLine("\t\t\ttexture.SetData(colData);")
+            .AppendLine("\t\t\treturn texture;")
+            .AppendLine("\t\t}")
+            .AppendLine("\t\tcatch")
+            .AppendLine("\t\t{")
+            .AppendLine("\t\t\ttexture.Dispose();")
+            .AppendLine("\t\t\tthrow;")
+            .AppendLine("\t\t}")
             .AppendLine("\t}")
             .AppendLine(string.Empty)
             .AppendLine("\tprivate static Color[] DecodeDataRLE(List<byte> rleByteData)")
